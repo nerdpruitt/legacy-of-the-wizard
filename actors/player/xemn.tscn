@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://yikkyldox5ai"]
 
-[ext_resource type="Script" path="res://actors/player/player.gd" id="1_0m4h2"]
+[ext_resource type="Script" path="res://components/player_base_movement.gd" id="1_8kxj2"]
 [ext_resource type="Texture2D" uid="uid://q3l2nlf6i3y5" path="res://actors/player/xemn-sheet.png" id="1_u1fau"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mnbmv"]
@@ -66,13 +66,19 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ymqe"]
 size = Vector2(13, 10)
 
-[node name="Player" type="CharacterBody2D"]
-script = ExtResource("1_0m4h2")
+[node name="Xemn" type="CharacterBody2D"]
+
+[node name="PlayerBaseMovement" type="Node" parent="." node_paths=PackedStringArray("actor", "animated_sprite")]
+script = ExtResource("1_8kxj2")
+actor = NodePath("..")
+animated_sprite = NodePath("../AnimatedSprite2D")
+speed = 120.0
+jump_velocity = -275.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_lw8jh")
-animation = &"jump"
+animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -5)

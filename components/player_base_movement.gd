@@ -1,22 +1,23 @@
-extends CharacterBody2D
+class_name PlayerBaseMovement
+extends Node
 
+@export var actor: CharacterBody2D
+@export var animated_sprite: AnimatedSprite2D
 
-const SPEED = 130.0
-const JUMP_VELOCITY = -300.0
+@export var speed = 130.0
+@export var jump_velocity = -300.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
-@onready var animated_sprite = $AnimatedSprite2D
-
 func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
+	# Add the gravity
+	if not actor.is_on_floor():
+		actor.velocity.y += gravity * delta
 
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if Input.is_action_just_pressed("jump") and actor.is_on_floor():
+		actor.velocity.y = jump_velocity
 
 	# Get the input direction: -1, 0, 1
 	var direction = Input.get_axis("move_left", "move_right")
@@ -28,7 +29,7 @@ func _physics_process(delta):
 		animated_sprite.flip_h = true
 	
 	# Play animations
-	if is_on_floor():
+	if actor.is_on_floor():
 		if direction == 0:
 			animated_sprite.play("idle")
 		else:
@@ -38,8 +39,8 @@ func _physics_process(delta):
 	
 	# Apply movement
 	if direction:
-		velocity.x = direction * SPEED
+		actor.velocity.x = direction * speed
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
+		actor.velocity.x = move_toward(actor.velocity.x, 0, speed)
 
-	move_and_slide()
+	actor.move_and_slide()

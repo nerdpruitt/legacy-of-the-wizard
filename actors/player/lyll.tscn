@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://bvoxu4skd6n53"]
+
+[ext_resource type="Script" path="res://components/player_base_movement.gd" id="1_w4qox"]
+[ext_resource type="Texture2D" uid="uid://dh5xijqltvu1" path="res://actors/player/lyll-sheet.png" id="2_akawb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vk4s5"]
+atlas = ExtResource("2_akawb")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysqsr"]
+atlas = ExtResource("2_akawb")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pp4qn"]
+atlas = ExtResource("2_akawb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hnqrd"]
+atlas = ExtResource("2_akawb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_65xvt"]
+atlas = ExtResource("2_akawb")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tpl10"]
+atlas = ExtResource("2_akawb")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_noexr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vk4s5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysqsr")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pp4qn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hnqrd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_65xvt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tpl10")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ofar2"]
+size = Vector2(10, 14)
+
+[node name="Lyll" type="CharacterBody2D"]
+
+[node name="PlayerBaseMovement" type="Node" parent="." node_paths=PackedStringArray("actor", "animated_sprite")]
+script = ExtResource("1_w4qox")
+actor = NodePath("..")
+animated_sprite = NodePath("../AnimatedSprite2D")
+speed = 150.0
+jump_velocity = -375.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_noexr")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_ofar2")
