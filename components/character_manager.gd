@@ -32,7 +32,7 @@ func _process(delta):
 			if Input.is_action_just_pressed("ui_accept") and can_change == true:
 				state = CHAR_2
 				print(state)
-				print("char 2 active")
+				print("lyll active")
 				
 				switch_character(lyll)
 
@@ -40,7 +40,7 @@ func _process(delta):
 			if Input.is_action_just_pressed("ui_accept") and can_change == true:
 				state = CHAR_1
 				print(state)
-				print("char 1 active")
+				print("xemn active")
 				
 				switch_character(xemn)
 
@@ -51,6 +51,7 @@ func _process(delta):
 				#print("char 1 active")
 				#reset_char_switch_delay()
 
+
 func switch_character(character_scene):
 	if is_instance_valid(character):
 		character.queue_free()
@@ -59,6 +60,7 @@ func switch_character(character_scene):
 	self.add_child(character)
 	
 	reset_char_switch_delay()
+
 
 func reset_char_switch_delay():
 	time_left = max_time
