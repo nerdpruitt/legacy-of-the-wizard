@@ -1,11 +1,23 @@
-[gd_scene load_steps=11 format=3 uid="uid://yikkyldox5ai"]
+[gd_scene load_steps=14 format=3 uid="uid://yikkyldox5ai"]
 
 [ext_resource type="Script" path="res://components/player_base_movement.gd" id="1_8kxj2"]
-[ext_resource type="Texture2D" uid="uid://q3l2nlf6i3y5" path="res://actors/player/xemn-sheet.png" id="1_u1fau"]
+[ext_resource type="Texture2D" uid="uid://c2kvbdrcwvle7" path="res://actors/player/xemn-sheet.png" id="1_u1fau"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mnbmv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pyso"]
 atlas = ExtResource("1_u1fau")
-region = Rect2(32, 16, 16, 16)
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8oa1i"]
+atlas = ExtResource("1_u1fau")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5nly0"]
+atlas = ExtResource("1_u1fau")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4r5d"]
+atlas = ExtResource("1_u1fau")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_84f1c"]
 atlas = ExtResource("1_u1fau")
@@ -31,7 +43,26 @@ region = Rect2(48, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mnbmv")
+"texture": SubResource("AtlasTexture_0pyso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8oa1i")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5nly0")
+}],
+"loop": true,
+"name": &"climb_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4r5d")
 }],
 "loop": true,
 "name": &"idle",
@@ -64,7 +95,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8ymqe"]
-size = Vector2(13, 11)
+size = Vector2(14, 15)
 
 [node name="Xemn" type="CharacterBody2D"]
 
@@ -78,11 +109,18 @@ jump_velocity = -275.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_lw8jh")
-animation = &"idle"
+animation = &"climb_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, -5.5)
+position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_8ymqe")
+
+[node name="LadderCheck" type="RayCast2D" parent="."]
+position = Vector2(0, -17)
+target_position = Vector2(2.08165e-12, 20)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true

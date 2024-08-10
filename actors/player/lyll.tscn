@@ -1,7 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://bvoxu4skd6n53"]
+[gd_scene load_steps=14 format=3 uid="uid://bvoxu4skd6n53"]
 
 [ext_resource type="Script" path="res://components/player_base_movement.gd" id="1_w4qox"]
-[ext_resource type="Texture2D" uid="uid://dh5xijqltvu1" path="res://actors/player/lyll-sheet.png" id="2_akawb"]
+[ext_resource type="Texture2D" uid="uid://c4lpndacvcpsr" path="res://actors/player/lyll-sheet.png" id="2_akawb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yuaqh"]
+atlas = ExtResource("2_akawb")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aehgs"]
+atlas = ExtResource("2_akawb")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_78mb6"]
+atlas = ExtResource("2_akawb")
+region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vk4s5"]
 atlas = ExtResource("2_akawb")
@@ -29,6 +41,25 @@ region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_noexr"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yuaqh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aehgs")
+}],
+"loop": true,
+"name": &"climb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78mb6")
+}],
+"loop": true,
+"name": &"climb_idle",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vk4s5")
@@ -77,7 +108,7 @@ jump_velocity = -375.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_noexr")
-animation = &"idle"
+animation = &"climb_idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
@@ -85,3 +116,10 @@ shape = SubResource("RectangleShape2D_ofar2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+
+[node name="LadderCheck" type="RayCast2D" parent="."]
+position = Vector2(2.08165e-12, -9)
+target_position = Vector2(2.08165e-12, 18)
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
