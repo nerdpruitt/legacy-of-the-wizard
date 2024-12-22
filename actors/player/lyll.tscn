@@ -114,12 +114,11 @@ animation = &"climb_idle"
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_ofar2")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position_smoothing_enabled = true
-
 [node name="LadderCheck" type="RayCast2D" parent="."]
 position = Vector2(2.08165e-12, -9)
 target_position = Vector2(2.08165e-12, 18)
 hit_from_inside = true
 collide_with_areas = true
 collide_with_bodies = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
